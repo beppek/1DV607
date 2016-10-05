@@ -7,64 +7,41 @@ namespace _1dv607Design
 {
     public class Program
     {
-        private static void Main(string[] args)
+        private static MemberController _memberCtrl;
+        private static RegistryView _view;
+
+        private static void Main()
         {
             Console.Title = "Member Registry";
 
-            var memberCtrl = new MemberController();
-            var view = new RegistryView();
+            _memberCtrl = new MemberController();
+            _view = new RegistryView();
 
-            view.Welcome();
+            MainMenu();
+            
+        }
+
+        private static void MainMenu()
+        {
+            _view.Welcome();
 
             var key = Console.ReadLine();
             int input;
-            while (!int.TryParse(key, out input) || input > 6 || input < 1)
+            while (!int.TryParse(key, out input) || input > 3 || input < 1)
             {
-                Console.WriteLine("Wrong input, try again...");
+                _view.RenderWrongInput();
                 key = Console.ReadLine();
-                view.Welcome();
+                _view.Welcome();
             }
-            while (input != 6)
+            while (input != 3)
             {
                 switch (input)
                 {
                     case 1:
-                        Console.WriteLine("How do you want to display the members? " +
-                                          "\n(V)erbose or (C)ompact?");
-                        var typeInput = Console.ReadLine();
-                        while (typeInput == null || (typeInput.ToLower() != "v" && typeInput.ToLower() != "c"))
-                        {
-                            Console.WriteLine("Wrong input, try again.");
-                            typeInput = Console.ReadLine();
-                        }
-                        var listType = typeInput.ToLower() == "v" ? ListType.Verbose : ListType.Compact;
-                        var members = memberCtrl.RetrieveAll(listType);
-                        if (listType == ListType.Compact)
-                        {
-                            view.DisplayMembersCompact(members);
-                        }
-                        else
-                        {
-                            view.DisplayMembersVerbose(members);
-                        }
-
+                        ListMembers();
                         break;
                     case 2:
-                        Console.WriteLine("Which member would you like to display?" +
-                                          "\nInput id below.");
-                        var idInput = Console.ReadLine();
-                        int id;
-                        while (idInput == null || !int.TryParse(idInput, out id))
-                        {
-                            Console.WriteLine("Wrong input, try inputting a number...");
-                            idInput = Console.ReadLine();
-                            Console.Clear();
-                        }
-                        var member = memberCtrl.Retrieve(id);
-                        Console.WriteLine(member.ToString(ListType.Compact));
-                        break;
-                    case 3:
-                        view.DisplayCreateMember();
+                        _view.DisplayCreateMember();
                         Console.WriteLine("Name:");
                         var name = Console.ReadLine();
                         Console.WriteLine("Personal Number (10 digits):");
@@ -76,32 +53,103 @@ namespace _1dv607Design
                             numberInput = Console.ReadLine();
                             Console.Clear();
                         }
-                        
-                        memberCtrl.Create(name, personalNumber);
+
+                        _memberCtrl.Create(name, personalNumber);
                         Console.Clear();
                         Console.WriteLine("Member successfully created!");
-                        break;
-                    case 4:
-                        break;
-                    case 5:
+                        Console.WriteLine("Hit any key to go back to the menu...");
+                        Console.ReadLine();
                         break;
                     default:
                         break;
                 }
-                Console.WriteLine("Continue...");
-                Console.ReadLine();
-                view.Welcome();
+
+                _view.Welcome();
                 key = Console.ReadLine();
-                while (!int.TryParse(key, out input) || input > 6 || input < 1)
+                while (!int.TryParse(key, out input) || input > 3 || input < 1)
                 {
-                    Console.WriteLine("Wrong input, try again...");
+                    _view.RenderWrongInput();
                     key = Console.ReadLine();
-                    view.Welcome();
+                    _view.Welcome();
                 }
 
             }
+
+            Environment.Exit(0);
+        }
+
+        private static void ListMembers()
+        {
+            Console.Clear();
+            Console.WriteLine(
+                            "How do you want to display the members? " +
+                            "\n(V)erbose or (C)ompact?"
+                            );
+            var typeInput = Console.ReadLine();
+            while (typeInput == null || (typeInput.ToLower() != "v" && typeInput.ToLower() != "c"))
+            {
+                _view.RenderWrongInput();
+                typeInput = Console.ReadLine();
+            }
+            var listType = typeInput.ToLower() == "v" ? ListType.Verbose : ListType.Compact;
+            var members = _memberCtrl.RetrieveAll(listType);
+            if (listType == ListType.Compact)
+            {
+                _view.DisplayMembersCompact(members);
+            }
+            else
+            {
+                _view.DisplayMembersVerbose(members);
+            }
+
+            var idInput = Console.ReadLine();
+            int id;
+            while (!string.IsNullOrWhiteSpace(idInput) && (!int.TryParse(idInput, out id)))
+            {
+                _view.RenderWrongInput();
+                idInput = Console.ReadLine();
+            }
+
+            if (idInput != null && (int.TryParse(idInput, out id)))
+            {
+                ViewMember(id);
+            }
             
-            
+        }
+
+        private static void ViewMember(int id)
+        {
+            var member = _memberCtrl.Retrieve(id);
+            _view.DisplayMemberInfo(member.ToString(ListType.Verbose));
+
+            var key = Console.ReadLine();
+            int input;
+            while (!int.TryParse(key, out input) || input > 7 || input < 1)
+            {
+                _view.RenderWrongInput();
+                key = Console.ReadLine();
+            }
+            switch (input)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    ListMembers();
+                    break;
+                case 7:
+                    MainMenu();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

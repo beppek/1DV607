@@ -92,7 +92,10 @@ namespace _1dv607Design.model
             {
                 return $"{Name, 20} {Id, 15} {BoatsOwned.Count, 14}";
             }
-            return $"{Name, 20} {PersonalNumber, 15} {Id, 14} {BoatsOwned, 14}";
+            return $"Name: {Name}\n" +
+                   $"Personal Number: {PersonalNumber}\n" +
+                   $"ID: {Id}\n" +
+                   $"Boats: {BoatsOwned}";
 
         }
     }

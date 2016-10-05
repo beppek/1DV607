@@ -15,12 +15,9 @@ namespace _1dv607Design.view
             Console.WriteLine(
                 "Welcome to the boat club member registry. " +
                 "\nSelect from the menu below by inputting corresponding number." +
-                "\n1 Display Member List" +
-                "\n2 Display Member by id" +
-                "\n3 Add New Member" +
-                "\n4 Delete Member by id" +
-                "\n5 Update Member by id" +
-                "\n6 Exit Program"
+                "\n1 List Members" +
+                "\n2 Add New Member" +
+                "\n3 Exit Program"
               );
         }
 
@@ -37,17 +34,20 @@ namespace _1dv607Design.view
             {
                 Console.WriteLine($"{member}\n");
             }
+            Console.WriteLine("--------------------------------------------------------------------------------");
+            Console.WriteLine("Input member id to view info or press enter to return to menu.");
         }
 
         public void DisplayMembersVerbose(List<string> memberList)
         {
             Console.Clear();
-            Console.WriteLine($"{"|Name|",15} {"|Personal Number|",25} {"|Number of Boats|",20} {"|Boats|", 10}");
-            Console.WriteLine("--------------------------------------------------------------------------------");
             foreach (var member in memberList)
             {
                 Console.WriteLine($"{member}\n");
+                Console.WriteLine("*************************\n");
             }
+            
+            Console.WriteLine("Input member id to view info or press enter to return to menu.");
         }
 
         /// <summary>
@@ -56,7 +56,20 @@ namespace _1dv607Design.view
         /// <param name="member"></param>
         public void DisplayMemberInfo(string member)
         {
+            Console.Clear();
+            Console.WriteLine($"{"|Name|",15} {"|Personal Number|",25} {"|ID|",10} {"|Boats|",10}");
+            Console.WriteLine("--------------------------------------------------------------------------------");
             Console.WriteLine(member);
+            Console.WriteLine("--------------------------------------------------------------------------------");
+            Console.WriteLine(
+                "1 Register Boat to Member" +
+                "\n2 Edit Boat" +
+                "\n3 Delete Boat" +
+                "\n4 Edit Member Info" +
+                "\n5 Delete Member" +
+                "\n6 Return to List" +
+                "\n7 Return to Main Menu"
+                );
         }
 
         /// <summary>
@@ -75,6 +88,11 @@ namespace _1dv607Design.view
                 "Create New Member" +
                 "\nInput member name and personal number below"
                 );
+        }
+
+        public void RenderWrongInput()
+        {
+            Console.WriteLine("Wrong input, try again...");
         }
     }
 }

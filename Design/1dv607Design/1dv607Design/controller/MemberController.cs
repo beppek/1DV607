@@ -37,5 +37,11 @@ namespace _1dv607Design.controller
 
             return membersStringList;
         }
+
+        public void RegisterBoat(BoatType boatType, double length, Member member)
+        {
+            var boat = new Boat(boatType, length);
+            member.RegisterBoat(boat);
+        }
     }
 }

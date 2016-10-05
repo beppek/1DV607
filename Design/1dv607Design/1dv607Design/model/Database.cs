@@ -28,6 +28,7 @@ namespace _1dv607Design.model
         public void Add(Member member)
         {
             _members.Add(member);
+            Save();
         }
 
         public void Delete()
@@ -57,7 +58,7 @@ namespace _1dv607Design.model
 
         public void Save()
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("Saving data");
         }
     }
 }
