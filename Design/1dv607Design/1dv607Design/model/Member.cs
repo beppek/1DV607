@@ -74,7 +74,13 @@ namespace _1dv607Design.model
         /// <param name="boat"></param>
         public void DeleteBoat(Boat boat)
         {
-            throw new System.NotImplementedException();
+            foreach (var boatOwned in _boatsOwned.Reverse<Boat>())
+            {
+                if (boatOwned == boat)
+                {
+                    _boatsOwned.Remove(boat);
+                }
+            }
         }
 
         /// <summary>

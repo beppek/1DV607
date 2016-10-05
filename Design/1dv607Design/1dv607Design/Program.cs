@@ -151,10 +151,12 @@ namespace _1dv607Design
                 case 2:
                     break;
                 case 3:
+                    DeleteBoat(member);
                     break;
                 case 4:
                     break;
                 case 5:
+                    _memberCtrl.Delete(member.Id);
                     break;
                 case 6:
                     ListMembers();
@@ -215,5 +217,11 @@ namespace _1dv607Design
             _memberCtrl.RegisterBoat(boatType, length, member);
 
         }
-    }
+        private static void DeleteBoat(Member member)
+        {
+            var boats = member.BoatsToString();
+            _view.RenderDeleteBoat(boats);
+            Console.ReadLine();
+        }
+}
 }

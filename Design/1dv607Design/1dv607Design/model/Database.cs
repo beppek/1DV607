@@ -31,9 +31,16 @@ namespace _1dv607Design.model
             Save();
         }
 
-        public void Delete()
+        public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            foreach (var member in _members.Reverse<Member>())
+            {
+                if (member.Id == id)
+                {
+                    _members.Remove(member);
+                }
+            }
+            Save();
         }
 
         public void Update()
@@ -53,7 +60,15 @@ namespace _1dv607Design.model
 
         public int GetUniqueId()
         {
-            return 3;
+            var highestId = 0;
+            foreach (var member in _members)
+            {
+                if (member.Id > highestId)
+                {
+                    highestId = member.Id;
+                }
+            }
+            return highestId + 1;
         }
 
         public void Save()

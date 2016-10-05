@@ -7,9 +7,9 @@ namespace _1dv607Design.controller
     public class MemberController
     {
         private readonly Database _db = new Database();
-        public void Delete()
+        public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            _db.Delete(id);
         }
 
         public void Create(string name, long personalNumber)
@@ -42,6 +42,7 @@ namespace _1dv607Design.controller
         {
             var boat = new Boat(boatType, length);
             member.RegisterBoat(boat);
+            _db.Save();
         }
     }
 }

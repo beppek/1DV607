@@ -23,7 +23,7 @@ namespace _1dv607Design.model
 
             set
             {
-                if (value < 0)
+                if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException();
                 }

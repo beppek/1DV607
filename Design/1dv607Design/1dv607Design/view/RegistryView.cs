@@ -107,5 +107,16 @@ namespace _1dv607Design.view
                 "\n4 Other"
                 );
         }
+        public void RenderDeleteBoat(List<string> boats)
+        {
+            Console.Clear();
+            Console.WriteLine("Which boat would you like to delete?");
+            var i = 1;
+            foreach (var boat in boats)
+            {
+                Console.WriteLine($"{i} {boat}");
+                i += 1;
+            }
+        }
     }
 }
