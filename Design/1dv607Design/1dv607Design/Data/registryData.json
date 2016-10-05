@@ -1,0 +1,14 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Beppe Karlsson",
+    "personalNumber": 8703271111,
+    "boats": []
+  },
+  {
+    "id": 2,
+    "name": "Bibban Carlsson",
+    "personalNumber": 5504231111,
+    "boats": []
+  }
+]
