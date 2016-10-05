@@ -72,15 +72,9 @@ namespace _1dv607Design.model
         /// Delete boat
         /// </summary>
         /// <param name="boat"></param>
-        public void DeleteBoat(Boat boat)
+        public void DeleteBoat(int index)
         {
-            foreach (var boatOwned in _boatsOwned.Reverse<Boat>())
-            {
-                if (boatOwned == boat)
-                {
-                    _boatsOwned.Remove(boat);
-                }
-            }
+            _boatsOwned.RemoveAt(index);
         }
 
         /// <summary>

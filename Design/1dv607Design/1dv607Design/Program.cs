@@ -221,7 +221,14 @@ namespace _1dv607Design
         {
             var boats = member.BoatsToString();
             _view.RenderDeleteBoat(boats);
-            Console.ReadLine();
+            var key = Console.ReadLine();
+            int input;
+            while (!int.TryParse(key, out input) && (input > member.BoatsOwned.Count || input < 1))
+            {
+                _view.RenderWrongInput();
+                key = Console.ReadLine();
+            }
+            _memberCtrl.DeleteBoat(input - 1, member);
         }
 }
 }

@@ -44,5 +44,10 @@ namespace _1dv607Design.controller
             member.RegisterBoat(boat);
             _db.Save();
         }
+
+        public void DeleteBoat(int index, Member member)
+        {
+            member.DeleteBoat(index);
+        }
     }
 }
