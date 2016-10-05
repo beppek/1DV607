@@ -1,34 +1,43 @@
-﻿namespace _1dv607Design.model
+﻿using System;
+
+namespace _1dv607Design.model
 {
     public class Boat
     {
+        private double _length;
+
+        /// <summary>
+        /// Cosntructor for Boat
+        /// </summary>
+        /// <param name="boatType">Enum BoatType - Sailboat, Motorsailer, Kayak, Other</param>
+        /// <param name="length"></param>
         public Boat(BoatType boatType, double length)
         {
-            throw new System.NotImplementedException();
+            Type = boatType;
+            Length = length;
         }
 
         public double Length
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+            get { return _length; }
 
             set
             {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+
+                _length = value;
             }
         }
 
         public BoatType Type
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        { get; set; }
 
-            set
-            {
-            }
+        public override string ToString()
+        {
+            return $"Type: {Type}, Length: {Length}";
         }
     }
 }

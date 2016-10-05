@@ -92,11 +92,17 @@ namespace _1dv607Design.model
             {
                 return $"{Name, 20} {Id, 15} {BoatsOwned.Count, 14}";
             }
+            var boats = string.Join("\n\t", BoatsToString());
             return $"Name: {Name}\n" +
                    $"Personal Number: {PersonalNumber}\n" +
                    $"ID: {Id}\n" +
-                   $"Boats: {BoatsOwned}";
+                   $"Boats: \t{boats}";
 
+        }
+
+        public List<string> BoatsToString()
+        {
+            return BoatsOwned.Select(boat => boat.ToString()).ToList();
         }
     }
 }

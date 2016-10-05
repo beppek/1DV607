@@ -94,5 +94,18 @@ namespace _1dv607Design.view
         {
             Console.WriteLine("Wrong input, try again...");
         }
+
+        public void RenderRegisterBoat()
+        {
+            Console.Clear();
+            Console.WriteLine(
+                "Select boat type and length (in meters)" +
+                "\nStart with the type" +
+                "\n1 Sailboat" +
+                "\n2 Motorsailer" +
+                "\n3 Kayak/Canoe" +
+                "\n4 Other"
+                );
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using _1dv607Design.controller;
+using _1dv607Design.model;
 using _1dv607Design.view;
 
 namespace _1dv607Design
@@ -10,6 +11,9 @@ namespace _1dv607Design
         private static MemberController _memberCtrl;
         private static RegistryView _view;
 
+        /// <summary>
+        /// Main method
+        /// </summary>
         private static void Main()
         {
             Console.Title = "Member Registry";
@@ -21,6 +25,9 @@ namespace _1dv607Design
             
         }
 
+        /// <summary>
+        /// Main Menu of application
+        /// </summary>
         private static void MainMenu()
         {
             _view.Welcome();
@@ -77,7 +84,10 @@ namespace _1dv607Design
 
             Environment.Exit(0);
         }
-
+        
+        /// <summary>
+        /// List the members in the registry and handle interaction with the list
+        /// </summary>
         private static void ListMembers()
         {
             Console.Clear();
@@ -117,6 +127,10 @@ namespace _1dv607Design
             
         }
 
+        /// <summary>
+        /// Handle interaction with selected member
+        /// </summary>
+        /// <param name="id">member id of member to be viewed</param>
         private static void ViewMember(int id)
         {
             var member = _memberCtrl.Retrieve(id);
@@ -132,6 +146,7 @@ namespace _1dv607Design
             switch (input)
             {
                 case 1:
+                    AddBoat(member);
                     break;
                 case 2:
                     break;
@@ -150,6 +165,55 @@ namespace _1dv607Design
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Add boat
+        /// </summary>
+        /// <param name="member"></param>
+        private static void AddBoat(Member member)
+        {
+            BoatType boatType;
+            _view.RenderRegisterBoat();
+            var key = Console.ReadLine();
+            int typeInput;
+            while (!int.TryParse(key, out typeInput) || typeInput > 4 || typeInput < 1)
+            {
+                _view.RenderWrongInput();
+                key = Console.ReadLine();
+            }
+
+            Console.WriteLine("Now we need the length of the boat in metres. " +
+                              "\nExample input: 3, 4.2, 5.75");
+            var lengthKey = Console.ReadLine();
+            double length;
+            while (!double.TryParse(lengthKey, out length))
+            {
+                _view.RenderWrongInput();
+                lengthKey = Console.ReadLine();
+            }
+
+            switch (typeInput)
+            {
+                case 1:
+                    boatType = BoatType.Sailboat;
+                    break;
+                case 2:
+                    boatType = BoatType.Motorsailer;
+                    break;
+                case 3:
+                    boatType = BoatType.Kayak;
+                    break;
+                case 4:
+                    boatType = BoatType.Other;
+                    break;
+                default:
+                    boatType = BoatType.Other;
+                    break;
+            }
+
+            _memberCtrl.RegisterBoat(boatType, length, member);
+
         }
     }
 }
