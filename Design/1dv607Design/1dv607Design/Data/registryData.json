@@ -10,5 +10,11 @@
     "name": "Bibban Carlsson",
     "personalNumber": 5504231111,
     "boats": []
+  },
+  {
+    "id": 3,
+    "name": "Mattis Carlsson",
+    "personalNumber": 9407071111,
+    "boats": []
   }
 ]
