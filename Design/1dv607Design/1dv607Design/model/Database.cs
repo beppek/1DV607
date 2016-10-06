@@ -43,9 +43,11 @@ namespace _1dv607Design.model
             Save();
         }
 
-        public void Update()
+        public void Update(Member updatedMember)
         {
-            throw new System.NotImplementedException();
+            var index = _members.FindIndex(a => a.Id == updatedMember.Id);
+            _members[index] = updatedMember;
+            Save();
         }
 
         public List<Member> RetrieveAll()

@@ -19,9 +19,11 @@ namespace _1dv607Design.controller
             _db.Add(member);
         }
 
-        public void Update()
+        public void Update(string name, long personalNumber, Member member)
         {
-            throw new System.NotImplementedException();
+            member.Update(name, personalNumber);
+            _db.Save();
+            //_db.Update(member);
         }
 
         public Member Retrieve(int id)
@@ -42,12 +44,22 @@ namespace _1dv607Design.controller
         {
             var boat = new Boat(boatType, length);
             member.RegisterBoat(boat);
+            //_db.Update(member);
             _db.Save();
         }
 
         public void DeleteBoat(int index, Member member)
         {
             member.DeleteBoat(index);
+            //_db.Update(member);
+            _db.Save();
+        }
+
+        public void UpdateBoat(int index, Member member, BoatType boatType, double length)
+        {
+            member.UpdateBoat(index, boatType, length);
+            //_db.Update(member);
+            _db.Save();
         }
     }
 }

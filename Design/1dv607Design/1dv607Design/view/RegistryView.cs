@@ -81,6 +81,9 @@ namespace _1dv607Design.view
             Console.WriteLine(boat);
         }
 
+        /// <summary>
+        /// Render view to Create new member
+        /// </summary>
         public void DisplayCreateMember()
         {
             Console.Clear();
@@ -107,16 +110,23 @@ namespace _1dv607Design.view
                 "\n4 Other"
                 );
         }
-        public void RenderDeleteBoat(List<string> boats)
+
+        public void RenderBoats(List<string> boats)
         {
-            Console.Clear();
-            Console.WriteLine("Which boat would you like to delete?");
+            
             var i = 1;
             foreach (var boat in boats)
             {
                 Console.WriteLine($"{i} {boat}");
                 i += 1;
             }
+        }
+
+        public void RenderEditMember()
+        {
+            Console.WriteLine("Input new information. " +
+                              "If you don't want to change a field just leave it blank and hit enter."
+                              );
         }
     }
 }

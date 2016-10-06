@@ -60,6 +60,17 @@ namespace _1dv607Design.model
         public IReadOnlyList<Boat> BoatsOwned => _boatsOwned.AsReadOnly();
 
         /// <summary>
+        /// Update the member
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="personalNumber"></param>
+        public void Update(string name, long personalNumber)
+        {
+            Name = name;
+            PersonalNumber = personalNumber;
+        }
+
+        /// <summary>
         /// Register boat to user
         /// </summary>
         /// <param name="boat"></param>
@@ -69,23 +80,31 @@ namespace _1dv607Design.model
         }
 
         /// <summary>
-        /// Delete boat
+        /// 
         /// </summary>
-        /// <param name="boat"></param>
+        /// <param name="index"></param>
         public void DeleteBoat(int index)
         {
             _boatsOwned.RemoveAt(index);
         }
 
         /// <summary>
-        /// Update boat info
+        /// Update a boat's information
         /// </summary>
-        /// <param name="boat"></param>
-        public void UpdateBoat(Boat boat)
+        /// <param name="index">index of the boat in the List</param>
+        /// <param name="boatType">BoatType - Sailboat, Motorsailer, Kayak, Other</param>
+        /// <param name="length">Double - length in meters</param>
+        public void UpdateBoat(int index, BoatType boatType, double length)
         {
-            throw new System.NotImplementedException();
+            var boat = _boatsOwned.ElementAt(index);
+            boat.Update(boatType, length);
         }
 
+        /// <summary>
+        /// Writes string of member information based on list type
+        /// </summary>
+        /// <param name="listType">ListType - Verbose or Compact</param>
+        /// <returns>string representing the member</returns>
         public string ToString(ListType listType)
         {
             if (listType == ListType.Compact)
@@ -100,6 +119,10 @@ namespace _1dv607Design.model
 
         }
 
+        /// <summary>
+        /// Writes string representation of the boat(s) owned by the member
+        /// </summary>
+        /// <returns></returns>
         public List<string> BoatsToString()
         {
             return BoatsOwned.Select(boat => boat.ToString()).ToList();

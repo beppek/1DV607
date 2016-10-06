@@ -48,24 +48,7 @@ namespace _1dv607Design
                         ListMembers();
                         break;
                     case 2:
-                        _view.DisplayCreateMember();
-                        Console.WriteLine("Name:");
-                        var name = Console.ReadLine();
-                        Console.WriteLine("Personal Number (10 digits):");
-                        var numberInput = Console.ReadLine();
-                        long personalNumber;
-                        while (!long.TryParse(numberInput, out personalNumber))
-                        {
-                            Console.WriteLine("No good, personal number must be a number!");
-                            numberInput = Console.ReadLine();
-                            Console.Clear();
-                        }
-
-                        _memberCtrl.Create(name, personalNumber);
-                        Console.Clear();
-                        Console.WriteLine("Member successfully created!");
-                        Console.WriteLine("Hit any key to go back to the menu...");
-                        Console.ReadLine();
+                        AddMember();
                         break;
                     default:
                         break;
@@ -128,6 +111,31 @@ namespace _1dv607Design
         }
 
         /// <summary>
+        /// Add member
+        /// </summary>
+        private static void AddMember()
+        {
+            _view.DisplayCreateMember();
+            Console.WriteLine("Name:");
+            var name = Console.ReadLine();
+            Console.WriteLine("Personal Number (10 digits):");
+            var numberInput = Console.ReadLine();
+            long personalNumber;
+            while (!long.TryParse(numberInput, out personalNumber))
+            {
+                Console.WriteLine("No good, personal number must be a number!");
+                numberInput = Console.ReadLine();
+                Console.Clear();
+            }
+
+            _memberCtrl.Create(name, personalNumber);
+            Console.Clear();
+            Console.WriteLine("Member successfully created!");
+            Console.WriteLine("Hit any key to go back to the menu...");
+            Console.ReadLine();
+        }
+
+        /// <summary>
         /// Handle interaction with selected member
         /// </summary>
         /// <param name="id">member id of member to be viewed</param>
@@ -149,11 +157,13 @@ namespace _1dv607Design
                     AddBoat(member);
                     break;
                 case 2:
+                    EditBoat(member);
                     break;
                 case 3:
                     DeleteBoat(member);
                     break;
                 case 4:
+                    EditMember(member);
                     break;
                 case 5:
                     _memberCtrl.Delete(member.Id);
@@ -175,27 +185,75 @@ namespace _1dv607Design
         /// <param name="member"></param>
         private static void AddBoat(Member member)
         {
-            BoatType boatType;
             _view.RenderRegisterBoat();
+            var boatType = GetBoatType();
+            var boatLength = GetBoatLength();
+            _memberCtrl.RegisterBoat(boatType, boatLength, member);
+
+        }
+
+        /// <summary>
+        /// Delete Boat
+        /// </summary>
+        /// <param name="member">Owner of the boat</param>
+        private static void DeleteBoat(Member member)
+        {
+            var boats = member.BoatsToString();
+            Console.Clear();
+            Console.WriteLine("Which boat would you like to delete?");
+            _view.RenderBoats(boats);
             var key = Console.ReadLine();
-            int typeInput;
-            while (!int.TryParse(key, out typeInput) || typeInput > 4 || typeInput < 1)
+            int input;
+            while (!int.TryParse(key, out input) && (input > member.BoatsOwned.Count || input < 1))
+            {
+                _view.RenderWrongInput();
+                key = Console.ReadLine();
+            }
+            _memberCtrl.DeleteBoat(input - 1, member);
+        }
+
+        /// <summary>
+        /// Edit boat
+        /// </summary>
+        /// <param name="member">Owner of the boat</param>
+        private static void EditBoat(Member member)
+        {
+            var boats = member.BoatsToString();
+            Console.Clear();
+            Console.WriteLine("Which boat would you like to edit?");
+            _view.RenderBoats(boats);
+            var key = Console.ReadLine();
+            int input;
+            while (!int.TryParse(key, out input) && (input > member.BoatsOwned.Count || input < 1))
             {
                 _view.RenderWrongInput();
                 key = Console.ReadLine();
             }
 
-            Console.WriteLine("Now we need the length of the boat in metres. " +
-                              "\nExample input: 3, 4.2, 5.75");
-            var lengthKey = Console.ReadLine();
-            double length;
-            while (!double.TryParse(lengthKey, out length))
+            var index = input - 1;
+
+            _view.RenderRegisterBoat();
+            var boatType = GetBoatType();
+            var boatLength = GetBoatLength();
+            _memberCtrl.UpdateBoat(index, member, boatType, boatLength);
+        }
+
+        /// <summary>
+        /// Lets user select boat type
+        /// </summary>
+        /// <returns></returns>
+        private static BoatType GetBoatType()
+        {
+            BoatType boatType;
+            var key = Console.ReadLine();
+            int input;
+            while (!int.TryParse(key, out input) || input > 4 || input < 1)
             {
                 _view.RenderWrongInput();
-                lengthKey = Console.ReadLine();
+                key = Console.ReadLine();
             }
 
-            switch (typeInput)
+            switch (input)
             {
                 case 1:
                     boatType = BoatType.Sailboat;
@@ -214,21 +272,67 @@ namespace _1dv607Design
                     break;
             }
 
-            _memberCtrl.RegisterBoat(boatType, length, member);
-
+            return boatType;
         }
-        private static void DeleteBoat(Member member)
+
+        /// <summary>
+        /// Lets user input boat length
+        /// </summary>
+        /// <returns></returns>
+        private static double GetBoatLength()
         {
-            var boats = member.BoatsToString();
-            _view.RenderDeleteBoat(boats);
+            Console.WriteLine("Now we need the length of the boat in metres. " +
+                              "\nExample input: 3, 4.2, 5.75");
             var key = Console.ReadLine();
-            int input;
-            while (!int.TryParse(key, out input) && (input > member.BoatsOwned.Count || input < 1))
+            double length;
+            while (!double.TryParse(key, out length) || length <= 0)
             {
                 _view.RenderWrongInput();
                 key = Console.ReadLine();
             }
-            _memberCtrl.DeleteBoat(input - 1, member);
+            return length;
         }
-}
+
+        /// <summary>
+        /// Edit the member
+        /// </summary>
+        /// <param name="member">Member to be edited</param>
+        private static void EditMember(Member member)
+        {
+            _view.RenderEditMember();
+            Console.WriteLine("Name:");
+            var name = Console.ReadLine();
+
+            //Assign original name if nothing new
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                name = member.Name;
+            }
+
+            Console.WriteLine("Personal Number (10 digits):");
+            var numberInput = Console.ReadLine();
+            long personalNumber;
+
+            //Assign original personal number if nothing new
+            if (string.IsNullOrWhiteSpace(numberInput))
+            {
+                personalNumber = member.PersonalNumber;
+            }
+            else
+            {
+                while (!long.TryParse(numberInput, out personalNumber))
+                {
+                    Console.WriteLine("No good, personal number must be a number!");
+                    numberInput = Console.ReadLine();
+                    Console.Clear();
+                }
+            }
+            
+            _memberCtrl.Update(name, personalNumber, member);
+            Console.Clear();
+            Console.WriteLine("Member successfully updated!");
+            Console.WriteLine("Hit any key to go back to the menu...");
+            Console.ReadLine();
+        }
+    }
 }
