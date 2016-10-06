@@ -30,7 +30,7 @@ namespace _1dv607Design
         /// </summary>
         private static void MainMenu()
         {
-            _view.Welcome();
+            _view.RenderWelcomeMessage();
 
             var key = Console.ReadLine();
             int input;
@@ -38,7 +38,7 @@ namespace _1dv607Design
             {
                 _view.RenderWrongInput();
                 key = Console.ReadLine();
-                _view.Welcome();
+                _view.RenderWelcomeMessage();
             }
             while (input != 3)
             {
@@ -50,17 +50,15 @@ namespace _1dv607Design
                     case 2:
                         AddMember();
                         break;
-                    default:
-                        break;
                 }
 
-                _view.Welcome();
+                _view.RenderWelcomeMessage();
                 key = Console.ReadLine();
                 while (!int.TryParse(key, out input) || input > 3 || input < 1)
                 {
                     _view.RenderWrongInput();
                     key = Console.ReadLine();
-                    _view.Welcome();
+                    _view.RenderWelcomeMessage();
                 }
 
             }
@@ -75,9 +73,9 @@ namespace _1dv607Design
         {
             Console.Clear();
             Console.WriteLine(
-                            "How do you want to display the members? " +
-                            "\n(V)erbose or (C)ompact?"
-                            );
+                    "How do you want to display the members? " +
+                    "\n(V)erbose or (C)ompact?"
+                    );
             var typeInput = Console.ReadLine();
             while (typeInput == null || (typeInput.ToLower() != "v" && typeInput.ToLower() != "c"))
             {
@@ -88,13 +86,14 @@ namespace _1dv607Design
             var members = _memberCtrl.RetrieveAll(listType);
             if (listType == ListType.Compact)
             {
-                _view.DisplayMembersCompact(members);
+                _view.RenderMembersCompact(members);
             }
             else
             {
-                _view.DisplayMembersVerbose(members);
+                _view.RenderMembersVerbose(members);
             }
 
+            //Select member to view
             var idInput = Console.ReadLine();
             int id;
             while (!string.IsNullOrWhiteSpace(idInput) && (!int.TryParse(idInput, out id)))
@@ -103,9 +102,23 @@ namespace _1dv607Design
                 idInput = Console.ReadLine();
             }
 
-            if (idInput != null && (int.TryParse(idInput, out id)))
+            if (int.TryParse(idInput, out id))
             {
-                ViewMember(id);
+                try
+                {
+                    ViewMember(id);
+                }
+                catch (Exception)
+                {
+                    Console.Clear();
+                    Console.WriteLine(
+                        "Something went wrong while retrieving the member." +
+                        "\nHit Enter to return to Main Menu..."
+                        );
+                    Console.ReadLine();
+                    MainMenu();
+                }
+                
             }
             
         }
@@ -115,20 +128,45 @@ namespace _1dv607Design
         /// </summary>
         private static void AddMember()
         {
-            _view.DisplayCreateMember();
-            Console.WriteLine("Name:");
+            _view.RenderCreateMember();
+            Console.WriteLine("Full Name (Firstname Lastname):");
             var name = Console.ReadLine();
             Console.WriteLine("Personal Number (10 digits):");
             var numberInput = Console.ReadLine();
             long personalNumber;
-            while (!long.TryParse(numberInput, out personalNumber))
+            while (!long.TryParse(numberInput, out personalNumber) || personalNumber.ToString().Length != 10)
             {
-                Console.WriteLine("No good, personal number must be a number!");
+                Console.WriteLine("No good, personal number must be a number with 10 digits!");
                 numberInput = Console.ReadLine();
                 Console.Clear();
             }
 
-            _memberCtrl.Create(name, personalNumber);
+            try
+            {
+                _memberCtrl.Create(name, personalNumber);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(
+                    "Something went wrong while creating the user! " +
+                    "Return to (m)ain menu or try (a)gain?"
+                    );
+                var input = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(input) || (input.ToLower() != "m" && input.ToLower() != "a"))
+                {
+                    _view.RenderWrongInput();
+                    input = Console.ReadLine();
+                }
+                if (input.ToLower() == "m")
+                {
+                    MainMenu();
+                }
+                else
+                {
+                    AddMember();
+                }
+            }
+            
             Console.Clear();
             Console.WriteLine("Member successfully created!");
             Console.WriteLine("Hit any key to go back to the menu...");
@@ -142,7 +180,7 @@ namespace _1dv607Design
         private static void ViewMember(int id)
         {
             var member = _memberCtrl.Retrieve(id);
-            _view.DisplayMemberInfo(member.ToString(ListType.Verbose));
+            _view.RenderMemberInfo(member.ToString(ListType.Verbose));
 
             var key = Console.ReadLine();
             int input;
@@ -173,8 +211,6 @@ namespace _1dv607Design
                     break;
                 case 7:
                     MainMenu();
-                    break;
-                default:
                     break;
             }
         }
@@ -209,7 +245,18 @@ namespace _1dv607Design
                 _view.RenderWrongInput();
                 key = Console.ReadLine();
             }
-            _memberCtrl.DeleteBoat(input - 1, member);
+            try
+            {
+                _memberCtrl.DeleteBoat(input - 1, member);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Unable to delete boat...");
+                Console.WriteLine("Hit Enter to return to menu...");
+                Console.ReadLine();
+                MainMenu();
+            }
+            
         }
 
         /// <summary>
@@ -299,12 +346,13 @@ namespace _1dv607Design
         /// <param name="member">Member to be edited</param>
         private static void EditMember(Member member)
         {
+            Console.Clear();
             _view.RenderEditMember();
-            Console.WriteLine("Name:");
+            Console.WriteLine("Full Name (Firstname Lastname):");
             var name = Console.ReadLine();
 
             //Assign original name if nothing new
-            if (String.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 name = member.Name;
             }

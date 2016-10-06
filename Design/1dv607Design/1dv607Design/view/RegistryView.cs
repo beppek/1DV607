@@ -9,7 +9,7 @@ namespace _1dv607Design.view
         /// <summary>
         /// Display welcome message
         /// </summary>
-        public void Welcome()
+        public void RenderWelcomeMessage()
         {
             Console.Clear();
             Console.WriteLine(
@@ -25,7 +25,7 @@ namespace _1dv607Design.view
         /// 
         /// </summary>
         /// <param name="memberList"></param>
-        public void DisplayMembersCompact(List<string> memberList)
+        public void RenderMembersCompact(List<string> memberList)
         {
             Console.Clear();
             Console.WriteLine($"{"|Name|", 15} {"|ID|", 21} {"|Number of Boats|", 24}");
@@ -38,7 +38,7 @@ namespace _1dv607Design.view
             Console.WriteLine("Input member id to view info or press enter to return to menu.");
         }
 
-        public void DisplayMembersVerbose(List<string> memberList)
+        public void RenderMembersVerbose(List<string> memberList)
         {
             Console.Clear();
             foreach (var member in memberList)
@@ -54,7 +54,7 @@ namespace _1dv607Design.view
         /// 
         /// </summary>
         /// <param name="member"></param>
-        public void DisplayMemberInfo(string member)
+        public void RenderMemberInfo(string member)
         {
             Console.Clear();
             Console.WriteLine($"{"|Name|",15} {"|Personal Number|",25} {"|ID|",10} {"|Boats|",10}");
@@ -76,7 +76,7 @@ namespace _1dv607Design.view
         /// 
         /// </summary>
         /// <param name="boat"></param>
-        public void DisplayBoatInfo(string boat)
+        public void RenderBoatInfo(string boat)
         {
             Console.WriteLine(boat);
         }
@@ -84,7 +84,7 @@ namespace _1dv607Design.view
         /// <summary>
         /// Render view to Create new member
         /// </summary>
-        public void DisplayCreateMember()
+        public void RenderCreateMember()
         {
             Console.Clear();
             Console.WriteLine(

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 using System.Linq;
 
 namespace _1dv607Design.model
@@ -10,6 +8,7 @@ namespace _1dv607Design.model
     {
         //Make array of boats
         private long _personalNumber;
+        private string _name;
 
         /// <summary>
         /// Constructor for member
@@ -29,7 +28,14 @@ namespace _1dv607Design.model
         /// Auto property for Name
         /// </summary>
         public string Name
-        { get; set; }
+        {
+            get { return _name; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
+                _name = value;
+            }
+        }
 
         /// <summary>
         /// Property for name

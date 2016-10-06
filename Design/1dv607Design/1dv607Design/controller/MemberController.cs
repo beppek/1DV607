@@ -7,6 +7,7 @@ namespace _1dv607Design.controller
     public class MemberController
     {
         private readonly Database _db = new Database();
+        
         public void Delete(int id)
         {
             _db.Delete(id);
@@ -23,7 +24,6 @@ namespace _1dv607Design.controller
         {
             member.Update(name, personalNumber);
             _db.Save();
-            //_db.Update(member);
         }
 
         public Member Retrieve(int id)
@@ -44,21 +44,18 @@ namespace _1dv607Design.controller
         {
             var boat = new Boat(boatType, length);
             member.RegisterBoat(boat);
-            //_db.Update(member);
             _db.Save();
         }
 
         public void DeleteBoat(int index, Member member)
         {
             member.DeleteBoat(index);
-            //_db.Update(member);
             _db.Save();
         }
 
         public void UpdateBoat(int index, Member member, BoatType boatType, double length)
         {
             member.UpdateBoat(index, boatType, length);
-            //_db.Update(member);
             _db.Save();
         }
     }
