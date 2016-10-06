@@ -16,7 +16,7 @@ namespace _1dv607Design.model
         public Database()
         {
             string json;
-            using (var reader = new StreamReader(@"..\..\Data\RegistryData.json"))
+            using (var reader = new StreamReader(@"..\..\Data\data.json"))
             {
                 json = reader.ReadToEnd();
             }
@@ -25,12 +25,20 @@ namespace _1dv607Design.model
 
         }
 
+        /// <summary>
+        /// Adds member to in-memory database
+        /// </summary>
+        /// <param name="member">member of Member object</param>
         public void Add(Member member)
         {
             _members.Add(member);
             Save();
         }
 
+        /// <summary>
+        /// Delete member with corresponding id from in-memory db
+        /// </summary>
+        /// <param name="id">id of member to be deleted</param>
         public void Delete(int id)
         {
             foreach (var member in _members.Reverse<Member>())
@@ -43,23 +51,29 @@ namespace _1dv607Design.model
             Save();
         }
 
-        public void Update(Member updatedMember)
-        {
-            var index = _members.FindIndex(a => a.Id == updatedMember.Id);
-            _members[index] = updatedMember;
-            Save();
-        }
-
+        /// <summary>
+        /// Retrieve All members in registry
+        /// </summary>
+        /// <returns>List of Members</returns>
         public List<Member> RetrieveAll()
         {
             return _members;
         }
 
+        /// <summary>
+        /// Retrieve Member with specific id
+        /// </summary>
+        /// <param name="id">id of member to be returned</param>
+        /// <returns>Member</returns>
         public Member Retrieve(int id)
         {
             return _members.FirstOrDefault(member => member.Id == id);
         }
 
+        /// <summary>
+        /// Gets unique id by looping through registry to find highest used id and adds 1
+        /// </summary>
+        /// <returns>highest Id of registry + 1</returns>
         public int GetUniqueId()
         {
             var highestId = 0;
@@ -73,9 +87,14 @@ namespace _1dv607Design.model
             return highestId + 1;
         }
 
+        /// <summary>
+        /// Save in-memory db to JSON file
+        /// </summary>
         public void Save()
         {
             Console.WriteLine("Saving data");
+            var json = JsonConvert.SerializeObject(_members, Formatting.Indented);
+            File.WriteAllText(@"../../Data/data.json", json);
         }
     }
 }

@@ -9,7 +9,6 @@ namespace _1dv607Design.model
     public class Member
     {
         //Make array of boats
-        private readonly List<Boat> _boatsOwned;
         private long _personalNumber;
 
         /// <summary>
@@ -23,7 +22,7 @@ namespace _1dv607Design.model
             Name = name;
             PersonalNumber = personalNumber;
             Id = id;
-            _boatsOwned = new List<Boat>();
+            BoatsOwned = new List<Boat>();
         }
 
         /// <summary>
@@ -57,7 +56,7 @@ namespace _1dv607Design.model
         /// <summary>
         /// Make array of boats
         /// </summary>
-        public IReadOnlyList<Boat> BoatsOwned => _boatsOwned.AsReadOnly();
+        public List<Boat> BoatsOwned { get; set; }
 
         /// <summary>
         /// Update the member
@@ -76,7 +75,7 @@ namespace _1dv607Design.model
         /// <param name="boat"></param>
         public void RegisterBoat(Boat boat)
         {
-            _boatsOwned.Add(boat);
+            BoatsOwned.Add(boat);
         }
 
         /// <summary>
@@ -85,7 +84,7 @@ namespace _1dv607Design.model
         /// <param name="index"></param>
         public void DeleteBoat(int index)
         {
-            _boatsOwned.RemoveAt(index);
+            BoatsOwned.RemoveAt(index);
         }
 
         /// <summary>
@@ -96,7 +95,7 @@ namespace _1dv607Design.model
         /// <param name="length">Double - length in meters</param>
         public void UpdateBoat(int index, BoatType boatType, double length)
         {
-            var boat = _boatsOwned.ElementAt(index);
+            var boat = BoatsOwned.ElementAt(index);
             boat.Update(boatType, length);
         }
 
