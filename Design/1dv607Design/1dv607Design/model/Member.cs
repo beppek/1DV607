@@ -105,6 +105,7 @@ namespace _1dv607Design.model
             boat.Update(boatType, length);
         }
 
+        //TODO: REMOVE
         /// <summary>
         /// Writes string of member information based on list type
         /// </summary>
@@ -124,6 +125,7 @@ namespace _1dv607Design.model
 
         }
 
+        //TODO: REMOVE
         /// <summary>
         /// Writes string representation of the boat(s) owned by the member
         /// </summary>

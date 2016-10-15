@@ -5,6 +5,34 @@ namespace _1dv607Design.view
 {
     public class RegistryView
     {
+        public RegistryView()
+        {
+            Console.Title = "Member Registry";
+        }
+
+        public MenuSelection MainMenu()
+        {
+            RenderWelcomeMessage();
+            
+            var key = Console.ReadLine();
+            int input;
+            while (!int.TryParse(key, out input) || input > 3 || input < 1)
+            {
+                RenderWrongInput();
+                key = Console.ReadLine();
+                RenderWelcomeMessage();
+            }
+            switch (input)
+            {
+                case 1:
+                    return MenuSelection.ListMembers;
+                case 2:
+                    return MenuSelection.AddMember;
+                default:
+                    return MenuSelection.Exit;
+            }
+
+        }
 
         /// <summary>
         /// Display welcome message

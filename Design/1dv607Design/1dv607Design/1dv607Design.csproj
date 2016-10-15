@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="BoatType.cs" />
     <Compile Include="ListType.cs" />
+    <Compile Include="MenuSelection.cs" />
     <Compile Include="model\Boat.cs" />
     <Compile Include="model\Database.cs" />
     <Compile Include="controller\MemberController.cs" />

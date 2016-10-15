@@ -16,13 +16,15 @@ namespace _1dv607Design
         /// </summary>
         private static void Main()
         {
-            Console.Title = "Member Registry";
-
             _memberCtrl = new MemberController();
             _view = new RegistryView();
 
-            MainMenu();
+            var menuSelection = _view.MainMenu();
             
+            while (menuSelection != MenuSelection.Exit)
+            {
+                menuSelection = _view.MainMenu();
+            }
         }
 
         /// <summary>
