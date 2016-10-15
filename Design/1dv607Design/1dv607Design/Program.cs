@@ -8,32 +8,26 @@ namespace _1dv607Design
 {
     public class Program
     {
-        //private static MemberController _memberCtrl;
-        private static RegistryView _view;
-
-        /// <summary>
-        /// Main method
-        /// </summary>
+        
         private static void Main()
         {
-            //_memberCtrl = new MemberController();
-            _view = new RegistryView();
+            var view = new RegistryView();
 
-            var menuSelection = _view.MainMenu();
+            var menuSelection = view.MainMenu();
 
             while (menuSelection != MenuSelection.Exit)
             {
                 switch (menuSelection)
                 {
                     case MenuSelection.AddMember:
-                        _view.AddMember();
+                        view.AddMember();
                         break;
                     case MenuSelection.ListMembers:
-                        _view.ListMembers();
+                        view.ListMembers();
                         break;
                 }
 
-                menuSelection = _view.MainMenu();
+                menuSelection = view.MainMenu();
             }
         }
     }

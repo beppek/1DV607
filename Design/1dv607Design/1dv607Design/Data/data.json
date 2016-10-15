@@ -28,5 +28,11 @@
         "Type": 3
       }
     ]
+  },
+  {
+    "Name": "asdfas",
+    "PersonalNumber": 1234123412,
+    "Id": 3,
+    "BoatsOwned": []
   }
 ]
