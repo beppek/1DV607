@@ -1,8 +1,5 @@
-﻿
+﻿using _1dv607Design.view;
 using System;
-using _1dv607Design.controller;
-using _1dv607Design.model;
-using _1dv607Design.view;
 
 namespace _1dv607Design
 {
@@ -29,6 +26,8 @@ namespace _1dv607Design
 
                 menuSelection = view.MainMenu();
             }
+
+            Environment.Exit(0);
         }
     }
 }

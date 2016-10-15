@@ -51,14 +51,6 @@ namespace _1dv607Design.model
             Type = boatType;
             Length = length;
         }
-
-        /// <summary>
-        /// Override ToString method
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return $"Type: {Type}, Length: {Length} meters";
-        }
+        
     }
 }

@@ -30,7 +30,7 @@ namespace _1dv607Design.model
         public string Name
         {
             get { return _name; }
-            set
+            private set
             {
                 if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
                 _name = value;
@@ -44,7 +44,7 @@ namespace _1dv607Design.model
         {
             get { return _personalNumber; }
 
-            set
+            private set
             {
                 if (value.ToString().Length != 10)
                 {
@@ -62,7 +62,7 @@ namespace _1dv607Design.model
         /// <summary>
         /// Make array of boats
         /// </summary>
-        public List<Boat> BoatsOwned { get; set; }
+        public List<Boat> BoatsOwned { get; private set; }
 
         /// <summary>
         /// Update the member
@@ -104,35 +104,6 @@ namespace _1dv607Design.model
             var boat = BoatsOwned.ElementAt(index);
             boat.Update(boatType, length);
         }
-
-        //TODO: REMOVE
-        /// <summary>
-        /// Writes string of member information based on list type
-        /// </summary>
-        /// <param name="listType">ListType - Verbose or Compact</param>
-        /// <returns>string representing the member</returns>
-        public string ToString(ListType listType)
-        {
-            if (listType == ListType.Compact)
-            {
-                return $"{Name, 20} {Id, 15} {BoatsOwned.Count, 14}";
-            }
-            var boats = string.Join("\n\t", BoatsToString());
-            return $"Name: {Name}\n" +
-                   $"Personal Number: {PersonalNumber}\n" +
-                   $"ID: {Id}\n" +
-                   $"Boats: \t{boats}";
-
-        }
-
-        //TODO: REMOVE
-        /// <summary>
-        /// Writes string representation of the boat(s) owned by the member
-        /// </summary>
-        /// <returns></returns>
-        public List<string> BoatsToString()
-        {
-            return BoatsOwned.Select(boat => boat.ToString()).ToList();
-        }
+        
     }
 }

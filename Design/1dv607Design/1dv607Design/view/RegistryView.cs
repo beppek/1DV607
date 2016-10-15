@@ -1,7 +1,6 @@
 ﻿using _1dv607Design.controller;
 using _1dv607Design.model;
 using System;
-using System.Collections.Generic;
 
 namespace _1dv607Design.view
 {
@@ -52,14 +51,16 @@ namespace _1dv607Design.view
                     "How do you want to display the members? " +
                     "\n(V)erbose or (C)ompact?"
                     );
+
             var typeInput = Console.ReadLine();
             while (typeInput == null || (typeInput.ToLower() != "v" && typeInput.ToLower() != "c"))
             {
                 _render.WrongInput();
                 typeInput = Console.ReadLine();
             }
+
             var listType = typeInput.ToLower() == "v" ? ListType.Verbose : ListType.Compact;
-            var members = _memberCtrl.RetrieveAll(listType);
+            var members = _memberCtrl.RetrieveAll();
             if (listType == ListType.Compact)
             {
                 _render.MembersCompact(members);
@@ -92,7 +93,6 @@ namespace _1dv607Design.view
                         "\nHit Enter to return to Main Menu..."
                         );
                     Console.ReadLine();
-                    MainMenu();
                 }
 
             }
@@ -105,7 +105,7 @@ namespace _1dv607Design.view
         private void ViewMember(int id)
         {
             var member = _memberCtrl.Retrieve(id);
-            _render.MemberInfo(member.ToString(ListType.Verbose));
+            _render.MemberInfo(member);
 
             var key = Console.ReadLine();
             int input;
@@ -135,7 +135,6 @@ namespace _1dv607Design.view
                     ListMembers();
                     break;
                 case 7:
-                    MainMenu();
                     break;
             }
         }
@@ -171,13 +170,13 @@ namespace _1dv607Design.view
                     _render.WrongInput();
                     input = Console.ReadLine();
                 }
-                if (input.ToLower() == "m")
+                if (input.ToLower() == "a")
                 {
-                    MainMenu();
+                    AddMember();
                 }
                 else
                 {
-                    AddMember();
+                    return;
                 }
             }
 
@@ -206,13 +205,13 @@ namespace _1dv607Design.view
         /// <param name="member">Owner of the boat</param>
         private void DeleteBoat(Member member)
         {
-            var boats = member.BoatsToString();
+            var boats = member.BoatsOwned;
             Console.Clear();
             Console.WriteLine("Which boat would you like to delete?");
             _render.Boats(boats);
             var key = Console.ReadLine();
             int input;
-            while (!int.TryParse(key, out input) && (input > member.BoatsOwned.Count || input < 1))
+            while (!int.TryParse(key, out input) && (input > boats.Count || input < 1))
             {
                 _render.WrongInput();
                 key = Console.ReadLine();
@@ -226,7 +225,6 @@ namespace _1dv607Design.view
                 Console.WriteLine("Unable to delete boat...");
                 Console.WriteLine("Hit Enter to return to menu...");
                 Console.ReadLine();
-                MainMenu();
             }
 
         }
@@ -237,13 +235,13 @@ namespace _1dv607Design.view
         /// <param name="member">Owner of the boat</param>
         private void EditBoat(Member member)
         {
-            var boats = member.BoatsToString();
+            var boats = member.BoatsOwned;
             Console.Clear();
             Console.WriteLine("Which boat would you like to edit?");
             _render.Boats(boats);
             var key = Console.ReadLine();
             int input;
-            while (!int.TryParse(key, out input) && (input > member.BoatsOwned.Count || input < 1))
+            while (!int.TryParse(key, out input) && (input > boats.Count || input < 1))
             {
                 _render.WrongInput();
                 key = Console.ReadLine();
@@ -282,9 +280,6 @@ namespace _1dv607Design.view
                     break;
                 case 3:
                     boatType = BoatType.Kayak;
-                    break;
-                case 4:
-                    boatType = BoatType.Other;
                     break;
                 default:
                     boatType = BoatType.Other;

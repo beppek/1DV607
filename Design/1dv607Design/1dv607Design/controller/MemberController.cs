@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using _1dv607Design.model;
 
 namespace _1dv607Design.controller
 {
     public class MemberController
     {
-        private readonly Database _db = new Database();
+        private readonly Registry _db = new Registry();
         
         public void Delete(int id)
         {
@@ -32,12 +31,10 @@ namespace _1dv607Design.controller
             return member;
         }
 
-        public List<string> RetrieveAll(ListType listType)
+        public List<Member> RetrieveAll()
         {
             var members = _db.RetrieveAll();
-            List<string> membersStringList = members.Select(member => member.ToString(listType)).ToList();
-
-            return membersStringList;
+            return members;
         }
 
         public void RegisterBoat(BoatType boatType, double length, Member member)

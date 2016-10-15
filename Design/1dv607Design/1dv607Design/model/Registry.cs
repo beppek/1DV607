@@ -6,14 +6,14 @@ using Newtonsoft.Json;
 
 namespace _1dv607Design.model
 {
-    public class Database
+    public class Registry
     {
         private readonly List<Member> _members;
 
         /// <summary>
         /// Read in text file
         /// </summary>
-        public Database()
+        public Registry()
         {
             string json;
             using (var reader = new StreamReader(@"..\..\Data\data.json"))

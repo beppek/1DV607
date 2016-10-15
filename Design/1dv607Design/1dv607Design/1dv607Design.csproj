@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoatType.cs" />
-    <Compile Include="ListType.cs" />
-    <Compile Include="MenuSelection.cs" />
+    <Compile Include="model\BoatType.cs" />
+    <Compile Include="view\ListType.cs" />
+    <Compile Include="view\MenuSelection.cs" />
     <Compile Include="model\Boat.cs" />
-    <Compile Include="model\Database.cs" />
+    <Compile Include="model\Registry.cs" />
     <Compile Include="controller\MemberController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
