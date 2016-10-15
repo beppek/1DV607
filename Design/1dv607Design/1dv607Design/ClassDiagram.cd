@@ -36,7 +36,7 @@
   <Class Name="_1dv607Design.view.RegistryView">
     <Position X="2.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAABAEAQAAAAAAAACAAAgATAIAA=</HashCode>
+      <HashCode>AAQAAAAgAAAAAAEAAAEBAEAQAQAAAAAACAAAgCTAIAA=</HashCode>
       <FileName>view\RegistryView.cs</FileName>
       <NewMemberFileName>View\RegistryView.cs</NewMemberFileName>
     </TypeIdentifier>
