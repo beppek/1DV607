@@ -52,7 +52,7 @@
     <Compile Include="view\MenuSelection.cs" />
     <Compile Include="model\Boat.cs" />
     <Compile Include="model\Registry.cs" />
-    <Compile Include="controller\MemberController.cs" />
+    <Compile Include="controller\RegistryController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="model\Member.cs" />

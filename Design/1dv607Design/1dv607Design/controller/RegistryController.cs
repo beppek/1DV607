@@ -3,7 +3,7 @@ using _1dv607Design.model;
 
 namespace _1dv607Design.controller
 {
-    public class MemberController
+    public class RegistryController
     {
         private readonly Registry _db = new Registry();
         

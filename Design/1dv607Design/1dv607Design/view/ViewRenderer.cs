@@ -103,15 +103,6 @@ namespace _1dv607Design.view
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="boat"></param>
-        public void BoatInfo(string boat)
-        {
-            Console.WriteLine(boat);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="memberList"></param>
         public void MembersCompact(List<Member> memberList)
         {

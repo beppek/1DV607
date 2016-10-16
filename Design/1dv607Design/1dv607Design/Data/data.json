@@ -5,8 +5,12 @@
     "Id": 1,
     "BoatsOwned": [
       {
-        "Length": 2.0,
+        "Length": 3.0,
         "Type": 0
+      },
+      {
+        "Length": 3.0,
+        "Type": 1
       }
     ]
   },
@@ -14,6 +18,11 @@
     "Name": "Kurt Cobain",
     "PersonalNumber": 6702209445,
     "Id": 2,
-    "BoatsOwned": []
+    "BoatsOwned": [
+      {
+        "Length": 2.0,
+        "Type": 3
+      }
+    ]
   }
 ]

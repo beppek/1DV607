@@ -6,13 +6,13 @@ namespace _1dv607Design.view
 {
     public class RegistryView
     {
-        private MemberController _memberCtrl;
+        private RegistryController _controller;
         private ViewRenderer _render;
 
         public RegistryView()
         {
             Console.Title = "Member Registry";
-            _memberCtrl = new MemberController();
+            _controller = new RegistryController();
             _render = new ViewRenderer();
         }
 
@@ -60,7 +60,7 @@ namespace _1dv607Design.view
             }
 
             var listType = typeInput.ToLower() == "v" ? ListType.Verbose : ListType.Compact;
-            var members = _memberCtrl.RetrieveAll();
+            var members = _controller.RetrieveAll();
             if (listType == ListType.Compact)
             {
                 _render.MembersCompact(members);
@@ -104,7 +104,7 @@ namespace _1dv607Design.view
         /// <param name="id">member id of member to be viewed</param>
         private void ViewMember(int id)
         {
-            var member = _memberCtrl.Retrieve(id);
+            var member = _controller.Retrieve(id);
             _render.MemberInfo(member);
 
             var key = Console.ReadLine();
@@ -129,7 +129,7 @@ namespace _1dv607Design.view
                     EditMember(member);
                     break;
                 case 5:
-                    _memberCtrl.Delete(member.Id);
+                    _controller.Delete(member.Id);
                     break;
                 case 6:
                     ListMembers();
@@ -156,7 +156,7 @@ namespace _1dv607Design.view
 
             try
             {
-                _memberCtrl.Create(name, personalNumber);
+                _controller.Create(name, personalNumber);
             }
             catch (Exception)
             {
@@ -195,7 +195,7 @@ namespace _1dv607Design.view
             _render.RegisterBoatView();
             var boatType = GetBoatType();
             var boatLength = GetBoatLength();
-            _memberCtrl.RegisterBoat(boatType, boatLength, member);
+            _controller.RegisterBoat(boatType, boatLength, member);
 
         }
 
@@ -218,7 +218,7 @@ namespace _1dv607Design.view
             }
             try
             {
-                _memberCtrl.DeleteBoat(input - 1, member);
+                _controller.DeleteBoat(input - 1, member);
             }
             catch (Exception)
             {
@@ -252,7 +252,7 @@ namespace _1dv607Design.view
             _render.RegisterBoatView();
             var boatType = GetBoatType();
             var boatLength = GetBoatLength();
-            _memberCtrl.UpdateBoat(index, member, boatType, boatLength);
+            _controller.UpdateBoat(index, member, boatType, boatLength);
         }
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace _1dv607Design.view
                 }
             }
 
-            _memberCtrl.Update(name, personalNumber, member);
+            _controller.Update(name, personalNumber, member);
             Console.Clear();
             Console.WriteLine("Member successfully updated!");
             Console.WriteLine("Hit any key to go back to the menu...");

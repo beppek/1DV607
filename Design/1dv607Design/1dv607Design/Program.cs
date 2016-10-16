@@ -26,8 +26,6 @@ namespace _1dv607Design
 
                 menuSelection = view.MainMenu();
             }
-
-            Environment.Exit(0);
         }
     }
 }
