@@ -3,7 +3,7 @@
   <Class Name="_1dv607Design.model.Member">
     <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gCAKIAAAAAAAAAAEAAAQAAQAAAAAAAAAAIAAAAAAACA=</HashCode>
+      <HashCode>gCQKIAAAAAEAAAAEAAAQAAQAAAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>model\Member.cs</FileName>
       <NewMemberFileName>Model\Member.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -11,7 +11,7 @@
   <Class Name="_1dv607Design.model.Boat">
     <Position X="8" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAEAAAAAABAAAAAAAAABQAAAAAAAAA=</HashCode>
       <FileName>model\Boat.cs</FileName>
       <NewMemberFileName>Model\Boat.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -22,21 +22,21 @@
   <Class Name="_1dv607Design.model.Database">
     <Position X="6" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AIYAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAgACAAAEAAA=</HashCode>
+      <HashCode>AIIAAIAAAAAAAABAAAAAAAAAAAEAAAAAAgAAAAAEAAA=</HashCode>
       <FileName>model\Database.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_1dv607Design.controller.MemberController">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIQAgAAAAAAAAAAAAAAAAAAAAAEAAEAAAgAAAAAAAAA=</HashCode>
+      <HashCode>gIQIgAAAAAAAAAAAAAAQAAAAAAEAAEAAAgAAAAAAAAA=</HashCode>
       <FileName>controller\MemberController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="_1dv607Design.view.RegistryView">
     <Position X="2.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAAEAAAAAAAAAAAACAAAAAgAAAAAAAAAAAEA=</HashCode>
+      <HashCode>AAQAAAAgAAAAAAEAAAEBAEAQAQAAAAAACAAAgCTAIAA=</HashCode>
       <FileName>view\RegistryView.cs</FileName>
       <NewMemberFileName>View\RegistryView.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -53,6 +53,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
       <FileName>ListType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_1dv607Design.MenuSelection">
+    <Position X="2.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAIAAAAABAAAA=</HashCode>
+      <FileName>MenuSelection.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
